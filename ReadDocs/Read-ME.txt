@@ -1,0 +1,4 @@
+comando gerar contexto e models na pasta models: 
+
+dotnet ef dbcontext scaffold "Server=E####;Database=ESSGestEducacao; User ID=####;Password=####; Trusted_Connection=True; TrustServerCertificate=True;"
+ Microsoft.EntityFrameworkCore.SqlServer -o Models
