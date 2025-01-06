@@ -1,5 +1,5 @@
 export interface IUsuarioDTO{
-    nome:string;
-    email:string;
-    senha:string;
+    Nome:string;
+    Email:string;
+    Senha:string;
 }

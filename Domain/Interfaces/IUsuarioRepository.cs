@@ -8,6 +8,6 @@ namespace Domain.Interfaces
         Task<int> InsertAsync(Usuario usuario);
         Task UpdateAsync(Usuario usuario);
         Task DeleteAsync(int id);
-        List<Usuario> ObterLista();
+        IList<Usuario> ObterLista();
     }
 }

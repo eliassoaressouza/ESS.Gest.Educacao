@@ -44,7 +44,7 @@ namespace Infrastructure.Repositories
             return resp;
         }
 
-        public List<Usuario> ObterLista()
+        public IList<Usuario> ObterLista()
         {
             var lista = new List<Usuario>();
             using (var ctx = _appDbContext)

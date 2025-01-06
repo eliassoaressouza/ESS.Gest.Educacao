@@ -1,10 +1,11 @@
 ﻿using Application.Interaces;
+using Application.Utils;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.Services
 {
-    public class UsuarioService:IUsuarioService
+    public class UsuarioService : IUsuarioService
     {
 
         private readonly IUsuarioRepository _usuarioRepository;
@@ -14,18 +15,26 @@ namespace Application.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<int> CreateAsync(string nome,string email)
+        public async Task<ReturnInfo<int>> CreateAsync(string nome, string email, string senha)
         {
-            var user = new Usuario { 
-              
+            var result = new ReturnInfo<int>();
+            var user = new Usuario
+            {
+                Senha = senha,
                 Nome = nome,
-                Email = email};
+                Email = email
+            };
             var userId = await _usuarioRepository.InsertAsync(user);
-            return userId;
+            result.Message = "Usuário Salvo com sucesso!!";
+            return result;
         }
-        public List<Usuario> ObterLista()
+        public ReturnInfo<Usuario> ObterLista()
         {
-            return _usuarioRepository.ObterLista();
+            var result = new ReturnInfo<Usuario>();
+
+            result.Items = _usuarioRepository.ObterLista();
+          
+            return result;
         }
     }
 }

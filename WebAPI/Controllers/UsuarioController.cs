@@ -1,7 +1,13 @@
-﻿namespace WebAPI.Controllers
+﻿using Application.Interaces;
+using Application.Utils;
+using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
+using WebAPI.ViewModels.usuario;
+
+namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
         IUsuarioService _usuarioService;
@@ -12,23 +18,42 @@
         }
 
         [HttpPost()]
-        public async Task<int> Salvar(string nome,string email)
+        public async Task<IActionResult> Salvar(UsuarioViewModel usuario)
         {
+            var result = new ReturnInfo<int>();
             try
             {
-                return await _usuarioService.CreateAsync(nome, email);
-            }
-            catch (Exception)
-            {
+                result = await _usuarioService.CreateAsync(usuario.Nome, usuario.Email, usuario.Senha);
 
-                return BadRequest("Request Inválido!");
+                return Ok(result);
             }
-            
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = "Failure";
+                result.Exception = ex;
+                return StatusCode(500, result);  //OR return response
+            }
+
         }
         [HttpGet()]
-        public List<Usuario> Listar()
+        public IActionResult Listar()
         {
-            return  _usuarioService.ObterLista();
+            var result = new ReturnInfo<Usuario>();
+            try
+            {
+                result = _usuarioService.ObterLista();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = "Failure";
+                result.Exception = ex;
+                return StatusCode(500, result);  //OR return response
+
+            }
+
         }
     }
 }

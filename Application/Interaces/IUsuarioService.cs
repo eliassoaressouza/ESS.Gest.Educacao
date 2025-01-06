@@ -1,11 +1,12 @@
-﻿using Domain.Entities;
+﻿using Application.Utils;
+using Domain.Entities;
 
 namespace Application.Interaces
 {
     public interface IUsuarioService
     {
-         Task<int> CreateAsync(string nome, string email);
+        Task<ReturnInfo<int>> CreateAsync(string nome, string email,string senha);
 
-        List<Usuario> ObterLista();
+        ReturnInfo<Usuario> ObterLista();
     }
 }
