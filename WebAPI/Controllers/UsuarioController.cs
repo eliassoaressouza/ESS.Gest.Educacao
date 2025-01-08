@@ -2,7 +2,7 @@
 using Application.Utils;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.ViewModels.usuario;
+using WebAPI.ViewModels.UsuarioVM;
 
 namespace WebAPI.Controllers
 {

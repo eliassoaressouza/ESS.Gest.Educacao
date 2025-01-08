@@ -36,5 +36,19 @@ namespace Application.Services
           
             return result;
         }
+        public ReturnInfo<Usuario> Obter(string email, string senha)
+        {
+            var result = new ReturnInfo<Usuario>();
+
+            result.Item = _usuarioRepository.Obter(email, senha);
+
+            if (result.Item == null)
+            {
+                result.Message = "Usuário ou senha inválidos!";
+                result.Status = false;
+            }
+
+            return result;
+        }
     }
 }

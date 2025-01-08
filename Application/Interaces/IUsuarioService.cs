@@ -8,5 +8,6 @@ namespace Application.Interaces
         Task<ReturnInfo<int>> CreateAsync(string nome, string email,string senha);
 
         ReturnInfo<Usuario> ObterLista();
+        ReturnInfo<Usuario> Obter( string email, string senha);
     }
 }

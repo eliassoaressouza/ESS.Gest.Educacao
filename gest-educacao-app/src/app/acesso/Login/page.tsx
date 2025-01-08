@@ -6,10 +6,13 @@ import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppContext } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 
 export function Login() {
   const router = useRouter()
-  
+  const { toast } = useToast()
+  const { loginAuth } = useAppContext();
   const usuarioShema = z.object({
     email: z.string().min(3),
     senha: z.string()
@@ -18,13 +21,23 @@ export function Login() {
     { resolver: zodResolver(usuarioShema) }
   );
   type UsuarioLoginShema = z.infer<typeof usuarioShema>
-  function loginPass(data: UsuarioLoginShema) {
-    console.log(data)
-    //router.push('/home/DashBoard');
+
+  async function loginPass(data: UsuarioLoginShema) {
+
+
+
+    let retorno = await loginAuth({ Email: data.email, Senha: data.senha });
+
+    if (!retorno.status) {
+      toast({
+        title: "GEST-EDUCAÇÃO",
+        description: retorno.message,
+      });
+      return;
+    }
+    router.push('/home/DashBoard');
   }
-  function novaConta() {
-    router.push('/acesso/NovaConta');
-  }
+
 
 
   return (
