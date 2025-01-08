@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {  parseCookies } from "nookies";
 
 
 
@@ -11,6 +11,13 @@ export const apiService = axios.create({
     // authtoken: authtoken
   },
 });
+const { ChaveCokie: token } = parseCookies();
+
+if(token){
+  apiService.defaults.headers['Authorization']= `Bearer ${token}`
+
+}
+
 /****
 apiService.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger

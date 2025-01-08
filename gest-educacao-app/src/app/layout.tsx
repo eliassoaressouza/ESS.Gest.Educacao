@@ -14,13 +14,13 @@ export default function RootLayout({
     <html lang="pt">
       <body>
         <Toaster />
-        <section className="main-content w-full overflow-auto p-6">
+        
           <div className="overflow-x-auto">
           <AppWrapper>
             {children}
             </AppWrapper>
           </div>
-        </section>
+        
       </body>
     </html>
   );

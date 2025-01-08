@@ -1,5 +1,6 @@
 ﻿using Application.Interaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using WebAPI.AuthConfig;
 using WebAPI.ViewModels.Auth;
 using WebAPI.ViewModels.UsuarioVM;
@@ -36,5 +37,21 @@ namespace WebAPI.Controllers
             // Retorna os dados
             return Ok(new AuthReturn() { ReturnInfo = usuarioResp, Token= token });
         }
+        [HttpPost("refresh")]
+        public ActionResult Refresh(string token)
+        {
+            // For simplicity, assume the refresh token is valid and stored securely
+            // var storedRefreshToken = _userService.GetRefreshToken(userId);
+
+            // Verify refresh token (validate against the stored token)
+            // if (storedRefreshToken != tokenResponse.RefreshToken)
+            //    return Unauthorized();
+
+            // For demonstration, let's just generate a new access token
+            var newAccessToken = TokenService.GenerateAccessTokenFromRefreshToken(token);
+
+            return Ok(new AuthReturn() { Token = newAccessToken });
+        }
+
     }
 }
