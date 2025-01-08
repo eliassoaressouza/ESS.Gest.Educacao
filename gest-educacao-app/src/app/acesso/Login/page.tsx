@@ -35,7 +35,7 @@ export function Login() {
       });
       return;
     }
-    router.push('/home/DashBoard');
+    router.push('/home');
   }
 
 

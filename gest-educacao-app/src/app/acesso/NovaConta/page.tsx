@@ -80,10 +80,17 @@ export default function NovaContaPage() {
               {errors.confirmSenha ? <span>{errors.confirmSenha.message}</span> : <></>}
             </div>
           </div>
-          <div className="!mt-12">
+          <div className="!mt-12 space-x-4">
+            
             <button type="submit" className="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
               Cadastrar
             </button>
+            
+            <a href="/"  >
+            <button type="button" className="py-3.5 px-8 text-sm font-semibold tracking-wider rounded-md text-white bg-green-400 hover:bg-green-600 focus:outline-none">
+              Voltar
+            </button>
+            </a>
           </div>
         </form>
       </div>

@@ -8,7 +8,7 @@ import { setCookie } from "nookies";
 import { createContext, useContext, useState } from "react";
 
 
-type Context = {
+export type Context = {
     state: IUsuarioDTO | null,
     isAuth: boolean,
     loginAuth: (data: AuthData) => Promise<ReturnInfo>
