@@ -16,8 +16,11 @@ namespace Infrastructure.IoC
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
             //Service
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<ICursoService, CursoService>();
             //Repository
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ICursoRepository, CursoRepository>();
+
         }
     }
 }

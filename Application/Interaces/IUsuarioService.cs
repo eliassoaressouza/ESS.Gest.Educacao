@@ -9,5 +9,6 @@ namespace Application.Interaces
 
         ReturnInfo<Usuario> ObterLista();
         ReturnInfo<Usuario> Obter( string email, string senha);
+        ReturnInfo<Usuario> Obter(int idUsuario);
     }
 }

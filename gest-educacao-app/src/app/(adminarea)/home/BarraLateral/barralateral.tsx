@@ -1,7 +1,17 @@
-import React from 'react';
+"use client"
+import React, { useContext } from 'react';
 import Image from 'next/image'
 
+import { AppContext } from '@/context/AuthContext';
+import { useRouter, } from 'next/navigation'
 export default function BarraLateral() {
+  const router = useRouter()
+  const { logout } = useContext(AppContext);
+    function logoutHandler(){
+        
+        logout();
+        router.push('/');
+    }
     return (
         <nav id="sidebar" className="lg:w-[270px] max-lg:fixed transition-all duration-500 shrink-0 z-[100]">
             <div id="sidebar-collapse-menu"
@@ -48,11 +58,11 @@ export default function BarraLateral() {
                             </a>
                         </li>
                         <li>
-                            <a href='/'>
-                                <button type="button" className="py-3.5 px-8 text-sm font-semibold tracking-wider rounded-md text-white bg-green-400 hover:bg-green-600 focus:outline-none">
-                                    Voltar
+                            
+                                <button onClick={logoutHandler} type="button" className="py-3.5 px-8 text-sm font-semibold tracking-wider rounded-md text-white bg-green-400 hover:bg-green-600 focus:outline-none">
+                                    Logout
                                 </button>
-                            </a>
+                            
                         </li>
                     </ul>
                     <hr className="border-gray-600 my-6" />

@@ -1,6 +1,7 @@
 ﻿using Application.Interaces;
+using Application.Utils;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using WebAPI.AuthConfig;
 using WebAPI.ViewModels.Auth;
 using WebAPI.ViewModels.UsuarioVM;
@@ -35,22 +36,30 @@ namespace WebAPI.Controllers
             usuarioResp.Item.Senha = "";
 
             // Retorna os dados
-            return Ok(new AuthReturn() { ReturnInfo = usuarioResp, Token= token });
+            return Ok(new AuthReturn() { ReturnInfo = usuarioResp, Token = token });
         }
-        [HttpPost("refresh")]
-        public ActionResult Refresh(string token)
+        [HttpPost("api/refresh")]
+        public ActionResult Refresh([FromBody] AuthRefresh authRefresh)
         {
-            // For simplicity, assume the refresh token is valid and stored securely
-            // var storedRefreshToken = _userService.GetRefreshToken(userId);
+            var result = new ReturnInfo<AuthReturn>();
+            try
+            {
+                var id = TokenService.GetName(authRefresh.Token);
+                var ReturnInfoResp = _usuarioService.Obter(int.Parse(id));
 
-            // Verify refresh token (validate against the stored token)
-            // if (storedRefreshToken != tokenResponse.RefreshToken)
-            //    return Unauthorized();
+                var newAccessToken = TokenService.GenerateToken(ReturnInfoResp.Item);
 
-            // For demonstration, let's just generate a new access token
-            var newAccessToken = TokenService.GenerateAccessTokenFromRefreshToken(token);
+                return Ok(new AuthReturn() { Token = newAccessToken, ReturnInfo = ReturnInfoResp });
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = "Failure";
+                result.Exception = ex;
+                return StatusCode(500, result);  //OR return response
 
-            return Ok(new AuthReturn() { Token = newAccessToken });
+            }
+           
         }
 
     }

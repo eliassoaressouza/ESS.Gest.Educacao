@@ -52,8 +52,7 @@ export default function NovaContaPage() {
             src="/gelogo.png"
             width={50}
             height={50}
-            alt="Picture of the author"
-          />
+            alt="Picture of the author"/>
           <h4 className="text-gray-800 text-base font-semibold mt-6">Registre sua conta</h4>
         </div>
 

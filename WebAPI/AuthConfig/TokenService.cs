@@ -17,9 +17,10 @@ namespace WebAPI.AuthConfig
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Nome.ToString()),
+                    new Claim(ClaimTypes.Name,user.IdUsuario.ToString()),
+                     new Claim("Nome",user.Nome),
+                     new Claim("IdUsuario",user.IdUsuario.ToString()),
                      new Claim(ClaimTypes.Email, user.Email.ToString()),
-
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -27,24 +28,21 @@ namespace WebAPI.AuthConfig
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-        public static string GenerateAccessTokenFromRefreshToken(string refreshToken)
+        public static string GetName(string token)
         {
-            // Implement logic to generate a new access token from the refresh token
-            // Verify the refresh token and extract necessary information (e.g., user ID)
-            // Then generate a new access token
 
-            // For demonstration purposes, return a new token with an extended expiry
-            var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
             {
-                Expires = DateTime.UtcNow.AddHours(2), // Extend expiration time
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
             };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var claims = handler.ValidateToken(token, validations, out var tokenSecure);
+            return claims.Identity.Name;
         }
+
     }
 }

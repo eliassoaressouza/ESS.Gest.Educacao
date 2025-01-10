@@ -1,4 +1,4 @@
-import { Login } from "./acesso/Login/page";
+import { Login } from "./(acesso)/Login/page";
 
 export default function Home() {
   return (

@@ -13,17 +13,6 @@ namespace Infrastructure.Repositories
         {
             _appDbContext = appDbContext;
         }
-
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Usuario> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<int> InsertAsync(Usuario usuario)
         {
             if (string.IsNullOrEmpty(usuario.Email)&&string.IsNullOrEmpty(usuario.Senha))
@@ -37,7 +26,7 @@ namespace Infrastructure.Repositories
 
                 using (var ctx = _appDbContext)
                 {
-                    ctx.Usuario.Add(usuario);
+                    ctx.Usuarios.Add(usuario);
                     resp = await ctx.SaveChangesAsync();
                 }
 
@@ -60,9 +49,19 @@ namespace Infrastructure.Repositories
             var usuario = new Usuario();
             using (var ctx = _appDbContext)
             {
-                usuario = ctx.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == MD5Hash.GerarHashMd5(senha));
+                usuario = ctx.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == MD5Hash.GerarHashMd5(senha));
             }
 
+            return usuario;
+        }
+
+        public Usuario Obter(int idUsuario)
+        {
+            var usuario = new Usuario();
+            using (var ctx = _appDbContext)
+            {
+                usuario = ctx.Usuarios.FirstOrDefault(u => u.IdUsuario==idUsuario);
+            }
             return usuario;
         }
 
@@ -71,19 +70,16 @@ namespace Infrastructure.Repositories
             var lista = new List<Usuario>();
             using (var ctx = _appDbContext)
             {
-                foreach (var item in ctx.Usuario)
+                foreach (var item in ctx.Usuarios)
                 {
 
-                    lista.Add(new Usuario { Email = item.Email, Id = item.Id, Nome = item.Nome });
+                    lista.Add(new Usuario { Email = item.Email, IdUsuario = item.IdUsuario, Nome = item.Nome });
 
                 }
             }
             return lista;
         }
 
-        public Task UpdateAsync(Usuario usuario)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

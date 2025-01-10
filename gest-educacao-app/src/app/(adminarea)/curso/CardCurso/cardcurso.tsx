@@ -1,26 +1,10 @@
+import { ICursoDTO } from '@/dto/curso/curso.dto';
 import React from 'react';
 
-export default function PainelPrincipal(props:{nomeUsuario:string}){
+export default function CardCurso( props:{curso:ICursoDTO}){
+    
   return (
-    <section className="main-content w-full p-6 max-lg:ml-8">
-    <div>
-      <div className="flex items-center flex-wrap gap-6">
-        <div>
-          <h3 className="text-lg font-semibold text-white">Bem vindo ,{props.nomeUsuario}</h3>
-        </div>
-        <div className="ml-auto">
-          <div className="flex gap-4">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="mt-12 mb-6 px-2">
-      <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-6">
-      
-        
-     
-        <div className="bg-[#0b1739] shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] p-6 w-full rounded-lg overflow-hidden">
+    <div className="bg-[#0b1739] shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] p-6 w-full rounded-lg overflow-hidden">
           <div className="inline-block bg-[#edf2f7] rounded-lg py-2 px-3">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-6" viewBox="0 0 511.999 511.999">
               <path fill="#06d"
@@ -45,8 +29,8 @@ export default function PainelPrincipal(props:{nomeUsuario:string}){
           </div>
 
           <div className="mt-4">
-            <h3 className="text-xl font-bold text-white">Heading</h3>
-            <p className="mt-2 text-sm text-gray-300">Lorem ipsum dolor sit amet, consectetur.</p>
+            <h3 className="text-xl font-bold text-white">{props.curso.nome}</h3>
+            <p className="mt-2 text-sm text-gray-300">{props.curso.descricao}</p>
           </div>
 
           <div className="mt-6">
@@ -60,9 +44,5 @@ export default function PainelPrincipal(props:{nomeUsuario:string}){
             </div>
           </div>
         </div>
-        
-      </div>
-    </div>
-  </section>
   );
 }

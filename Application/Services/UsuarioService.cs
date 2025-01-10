@@ -50,5 +50,20 @@ namespace Application.Services
 
             return result;
         }
+
+        public ReturnInfo<Usuario> Obter(int idUsuario)
+        {
+            var result = new ReturnInfo<Usuario>();
+
+            result.Item = _usuarioRepository.Obter(idUsuario);
+
+            if (result.Item == null)
+            {
+                result.Message = "obrigatório id usuario!";
+                result.Status = false;
+            }
+
+            return result;
+        }
     }
 }

@@ -1,5 +1,5 @@
 export interface IUsuarioDTO{
-    id:number;
+    idUsuario:number;
     nome:string;
     email:string;
     senha:string;

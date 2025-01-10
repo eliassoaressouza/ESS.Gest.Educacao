@@ -14,7 +14,6 @@ export default function RootLayout({
     <html lang="pt">
       <body>
         <Toaster />
-        
           <div className="overflow-x-auto">
           <AppWrapper>
             {children}

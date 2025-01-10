@@ -8,4 +8,9 @@ namespace WebAPI.ViewModels.Auth
         public string Token { get; set; }
         public ReturnInfo<Usuario> ReturnInfo { get; set; }
     }
+    public class AuthRefresh
+    {
+        public string Token { get; set; }
+      
+    }
 }

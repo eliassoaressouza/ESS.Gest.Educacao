@@ -56,7 +56,7 @@ export function Login() {
           <Button type="submit" className="mb-6 w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600" > Entrar </Button>
 
         </form>
-        <a href="/acesso/NovaConta">
+        <a href="/NovaConta">
           <Button type="button" className="w-full px-4 py-2 bg-green-400 text-white font-medium rounded-md hover:bg-green-500" > Criar Nova Conta </Button>
         </a>
       </div>

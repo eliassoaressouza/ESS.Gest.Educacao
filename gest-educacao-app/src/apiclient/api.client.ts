@@ -1,3 +1,4 @@
+import { ChaveCokie } from "@/context/ChaveCokie";
 import axios from "axios";
 import {  parseCookies } from "nookies";
 
@@ -11,11 +12,16 @@ export const apiService = axios.create({
     // authtoken: authtoken
   },
 });
-const { ChaveCokie: token } = parseCookies();
+
+apiService.interceptors.request.use(config=>{
+
+  //console.log('intercept request!!!');  console.log(config)
+  return config;
+});
+const { 'gest-educacao-token': token } = parseCookies();
 
 if(token){
   apiService.defaults.headers['Authorization']= `Bearer ${token}`
-
 }
 
 /****
