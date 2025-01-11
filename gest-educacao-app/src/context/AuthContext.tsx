@@ -7,7 +7,8 @@ import { IUsuarioDTO } from "@/dto/usuario/usuario.dto";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { ChaveCokie } from "./ChaveCokie";
-
+import { ICursoDTO } from "@/dto/curso/curso.dto";
+import { CursoApiClient } from "@/apiclient/curso.api.client";
 
 
 export type Context = {
@@ -15,11 +16,13 @@ export type Context = {
     isAuth: boolean,
     loginAuth: (data: AuthData) => Promise<ReturnInfo>,
     logout: () => void,
+    listaCurso: ICursoDTO[]
 };
 export const AppContext = createContext<Context>({} as Context);
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
     const [state, setState] = useState<IUsuarioDTO | null>(null);
+    const [listaCurso, setlistaCurso] = useState([] as ICursoDTO[]);
     const isAuth = !!state;
 
     function logout() {
@@ -42,17 +45,26 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         var refreshResp = await new AuthApiClient().refresh({ Token: token });
         let resp = refreshResp.returnInfo;
         if (resp.status) {
-            setState(resp.item as IUsuarioDTO);
+            const usuario = resp.item as IUsuarioDTO
+            setState(usuario);
+            //listarcurso
+            await listarCurso(usuario.idUsuario);
         }
     }, []);
-
-
+    //listarcurso
+    async function listarCurso(idUsuario: number) {
+        const respApi = await new CursoApiClient().ObterLista(idUsuario);
+        if (respApi.status) {
+            setlistaCurso(respApi.items as ICursoDTO[]);
+        }
+    }
     function setCokkie(token: string) {
         setCookie(undefined, ChaveCokie, token,
             {
                 maxAge: 60 * 60 * 2 //2 horas
             });
     }
+
 
     useEffect(() => {
 
@@ -76,7 +88,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
 
     return (
 
-        <AppContext.Provider value={{ state, isAuth, loginAuth, logout }}>
+        <AppContext.Provider value={{ state, isAuth, loginAuth, logout, listaCurso }}>
             {children}
         </AppContext.Provider>
     )
