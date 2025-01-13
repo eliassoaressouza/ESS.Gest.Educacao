@@ -1,7 +1,7 @@
 export interface ReturnInfo {
-    status: boolean;
-    message: string;
-    item: {}
-    items: []
-    exception: object;
+    Status: boolean;
+    Message: string;
+    Item: {}
+    Items: []
+    Exception: object;
   }

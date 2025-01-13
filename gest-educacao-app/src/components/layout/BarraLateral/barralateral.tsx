@@ -1,9 +1,10 @@
 "use client"
 import React, { useContext } from 'react';
 import Image from 'next/image'
-import { BookOpenText } from 'lucide-react';
+import { BookOpenText, NotebookPen } from 'lucide-react';
 import { AppContext } from '@/context/AuthContext';
-import { useRouter, } from 'next/navigation'
+import { useRouter, } from 'next/navigation';
+import { LogOut } from 'lucide-react';
 export default function BarraLateral() {
   const router = useRouter()
   const { logout } = useContext(AppContext);
@@ -61,7 +62,19 @@ export default function BarraLateral() {
                         <a href="/curso"
                                 className="text-gray-300 text-sm flex items-center cursor-pointer hover:bg-[#0b1739] rounded-md px-3 py-2.5 transition-all duration-300">
                                 <BookOpenText />
-                                <span className="ml-3 overflow-hidden text-ellipsis whitespace-nowrap">Cadastro de Curso</span>
+                                <span className="ml-3 overflow-hidden text-ellipsis whitespace-nowrap">Curso</span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    className="arrowIcon w-2.5 h-2.5 fill-current rotate-0 ml-auto transition-all duration-500"
+                                    viewBox="0 0 451.847 451.847">
+                                    <path
+                                        d="M225.923 354.706c-8.098 0-16.195-3.092-22.369-9.263L9.27 151.157c-12.359-12.359-12.359-32.397 0-44.751 12.354-12.354 32.388-12.354 44.748 0l171.905 171.915 171.906-171.909c12.359-12.354 32.391-12.354 44.744 0 12.365 12.354 12.365 32.392 0 44.751L248.292 345.449c-6.177 6.172-14.274 9.257-22.369 9.257z"
+                                        data-original="#000000" />
+                                </svg>
+                            </a>
+                            <a href="/matricula"
+                                className="text-gray-300 text-sm flex items-center cursor-pointer hover:bg-[#0b1739] rounded-md px-3 py-2.5 transition-all duration-300">
+                                <NotebookPen />
+                                <span className="ml-3 overflow-hidden text-ellipsis whitespace-nowrap">Matricula</span>
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     className="arrowIcon w-2.5 h-2.5 fill-current rotate-0 ml-auto transition-all duration-500"
                                     viewBox="0 0 451.847 451.847">
@@ -72,11 +85,10 @@ export default function BarraLateral() {
                             </a>
                         </li>
                         <li>
-                            
-                                <button onClick={logoutHandler} type="button" className="py-3.5 px-8 text-sm font-semibold tracking-wider rounded-md text-white bg-green-400 hover:bg-green-600 focus:outline-none">
-                                    Logout
-                                </button>
-                            
+                        <div onClick={logoutHandler} className="text-gray-300 text-sm flex items-center cursor-pointer hover:bg-[#0b1739] rounded-md px-3 py-2.5 transition-all duration-300">
+                            <LogOut  />
+                            <span className="ml-3 overflow-hidden text-ellipsis whitespace-nowrap">Sair</span>
+                            </div>
                         </li>
                     </ul>
                     <hr className="border-gray-600 my-6" />

@@ -25,7 +25,7 @@ namespace Application.Services
                 Email = email
             };
             var userId = await _usuarioRepository.InsertAsync(user);
-            result.Message = "Usuário Salvo com sucesso!!";
+         
             return result;
         }
         public ReturnInfo<Usuario> ObterLista()
@@ -64,6 +64,11 @@ namespace Application.Services
             }
 
             return result;
+        }
+
+        public IList<Usuario> ObterListaComMatriculas()
+        {
+            return _usuarioRepository.ObterListaComMatriculas();
         }
     }
 }

@@ -28,18 +28,15 @@ export function Login() {
 
     let retorno = await loginAuth({ Email: data.email, Senha: data.senha });
 
-    if (!retorno.status) {
+    if (!retorno.Status) {
       toast({
         title: "GEST-EDUCAÇÃO",
-        description: retorno.message,
+        description: retorno.Message,
       });
       return;
     }
     router.push('/home');
   }
-
-
-
   return (
     <div className="overflow-x-auto">
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">

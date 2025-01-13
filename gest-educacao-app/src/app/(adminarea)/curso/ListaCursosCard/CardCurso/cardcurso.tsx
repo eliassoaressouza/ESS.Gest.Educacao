@@ -29,8 +29,8 @@ export default function CardCurso( props:{curso:ICursoDTO}){
           </div>
 
           <div className="mt-4">
-            <h3 className="text-xl font-bold text-white">{props.curso.nome}</h3>
-            <p className="mt-2 text-sm text-gray-300">{props.curso.descricao}</p>
+            <h3 className="text-xl font-bold text-white">{props.curso.Nome}</h3>
+            <p className="mt-2 text-sm text-gray-300">{props.curso.Descricao}</p>
           </div>
 
           <div className="mt-6">

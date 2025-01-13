@@ -1,14 +1,12 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
     public interface ICursoRepository
     {
         IList<Curso> ObterLista(int idUsuario);
+        IList<Curso> ObterLista();
+        int Salvar(Curso curso);
+        int Excluir(int IdCurso);
     }
 }

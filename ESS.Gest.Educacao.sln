@@ -18,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadDocs", "ReadDocs", "{911C1E7A-8474-4E83-9F1A-A993090FE563}"
 	ProjectSection(SolutionItems) = preProject
 		WebAPI\arquitetura cebola.png = WebAPI\arquitetura cebola.png
+		..\..\Users\Elias Soares\Downloads\arquitetura projeto.png = ..\..\Users\Elias Soares\Downloads\arquitetura projeto.png
+		..\..\Users\Elias Soares\Downloads\Autenticação JWT DotNet-React.docx = ..\..\Users\Elias Soares\Downloads\Autenticação JWT DotNet-React.docx
 		Read-ME.txt = Read-ME.txt
 	EndProjectSection
 EndProject

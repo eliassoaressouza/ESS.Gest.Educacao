@@ -17,9 +17,11 @@ namespace Infrastructure.IoC
             //Service
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ICursoService, CursoService>();
+            services.AddScoped<IMatriculaService,MatriculaService>();
             //Repository
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ICursoRepository, CursoRepository>();
+            services.AddScoped<IMatriculaRepository, MatriculaRepository>();
 
         }
     }

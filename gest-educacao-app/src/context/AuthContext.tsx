@@ -33,29 +33,30 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     async function loginAuth({ Email, Senha }: AuthData): Promise<ReturnInfo> {
         var loginResp = await new AuthApiClient().login({ Email, Senha });
         //armazenar o token
-        let resp = loginResp.returnInfo;
-        if (resp.status) {
-            setCokkie(loginResp.token);
-            setState(resp.item as IUsuarioDTO);
+        let resp = loginResp.ReturnInfo;
+        console.log(resp)
+        if (resp.Status) {
+            setCokkie(loginResp.Token);
+            setState(resp.Item as IUsuarioDTO);
         }
         return resp;
     }
     //refreshToken
     const refreshToken = useCallback(async (token: string) => {
         var refreshResp = await new AuthApiClient().refresh({ Token: token });
-        let resp = refreshResp.returnInfo;
-        if (resp.status) {
-            const usuario = resp.item as IUsuarioDTO
+        let resp = refreshResp.ReturnInfo;
+        if (resp.Status) {
+            const usuario = resp.Item as IUsuarioDTO
             setState(usuario);
             //listarcurso
-            await listarCurso(usuario.idUsuario);
+            await listarCurso(usuario.IdUsuario);
         }
     }, []);
     //listarcurso
     async function listarCurso(idUsuario: number) {
         const respApi = await new CursoApiClient().ObterLista(idUsuario);
-        if (respApi.status) {
-            setlistaCurso(respApi.items as ICursoDTO[]);
+        if (respApi.Status) {
+            setlistaCurso(respApi.Items as ICursoDTO[]);
         }
     }
     function setCokkie(token: string) {

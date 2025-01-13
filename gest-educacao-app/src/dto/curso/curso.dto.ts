@@ -1,9 +1,9 @@
 
 
 export interface ICursoDTO{
-    idCurso:number;
-    nome:string;
-    descricao:string;
-    datainicio:Date;
-    datafim:Date;
+    IdCurso:number;
+    Nome:string;
+    Descricao:string;
+    Datainicio:Date;
+    Datafim:Date;
 }

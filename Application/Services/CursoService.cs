@@ -14,6 +14,15 @@ namespace Application.Services
             _CursoRepository = cursoRepository;
         }
 
+        public ReturnInfo<int> Excluir(int IdCurso)
+        {
+            var result = new ReturnInfo<int>();
+
+            result.Item = _CursoRepository.Excluir(IdCurso);
+
+            return result;
+        }
+
         public ReturnInfo<Curso> ObterLista(int idUsuario)
         {
             var result = new ReturnInfo<Curso>();
@@ -22,6 +31,24 @@ namespace Application.Services
 
             return result;
 
+        }
+
+        public ReturnInfo<Curso> ObterLista()
+        {
+            var result = new ReturnInfo<Curso>();
+
+            result.Items = _CursoRepository.ObterLista();
+
+            return result;
+        }
+
+        public ReturnInfo<int> Salvar(Curso curso)
+        {
+            var result = new ReturnInfo<int>();
+
+            result.Item = _CursoRepository.Salvar(curso);
+
+            return result;
         }
     }
 }

@@ -11,5 +11,13 @@ export class UsuarioApiClient {
         returnInfo = data;
         return returnInfo;
     }
+    async ObterListaTodos(): Promise<ReturnInfo> {
+        const respApi = await apiService.get(`usuario`);
+        return await respApi.data;
+    }
+    async ObterListaUsuarioCursos(): Promise<ReturnInfo> {
+        const respApi = await apiService.get(`usuario/listarusuariocursos`);
+        return await respApi.data;
+    }
 
 }

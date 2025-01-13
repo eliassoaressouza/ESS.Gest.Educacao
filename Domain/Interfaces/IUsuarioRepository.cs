@@ -10,5 +10,6 @@ namespace Domain.Interfaces
         Task<int> InsertAsync(Usuario usuario);
         
         IList<Usuario> ObterLista();
+        IList<Usuario> ObterListaComMatriculas();
     }
 }

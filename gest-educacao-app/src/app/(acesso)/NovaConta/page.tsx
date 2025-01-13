@@ -35,10 +35,10 @@ export default function NovaContaPage() {
     let resp = new UsuarioApiClient().Salvar({ Email: data.email, Nome: data.nome, Senha: data.senha });
     var retorno = await resp;
 
-    if (retorno.status) {
+    if (retorno.Status) {
       toast({
         title: "GEST-EDUCAÇÃO",
-        description: retorno.message,
+        description: retorno.Message,
       });
       router.push('/')
     }

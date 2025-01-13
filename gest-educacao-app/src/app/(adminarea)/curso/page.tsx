@@ -1,31 +1,47 @@
-import React from 'react';
+"use client"
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import ListaCursos from './ListaCursos/listacursos';
+import { ICursoDTO } from '@/dto/curso/curso.dto';
+import { CursoApiClient } from '@/apiclient/curso.api.client';
+import { CursoForm, FormCursoHandle } from './CursoForm/cursoform';
+import { Button } from '@/components/ui/button';
 
-export default function CadastroPage() {
+
+export default function CursoPage() {
+  const [listaCursos, setlistaCurso] = useState([] as ICursoDTO[]);
+  const formRef = useRef<FormCursoHandle>(null);
+
+  const listarCursosCallBack = useCallback(async () => {
+    await listarCursos();
+  }, []);
+  async function listarCursos(){
+    const respApi = await new CursoApiClient().ObterListaTodos();
+    if (respApi.Status) {
+      setlistaCurso(respApi.Items as ICursoDTO[]);
+    }
+  }
+
+
+  function carregarEditar(despesa: ICursoDTO) {
+    formRef.current?.abrirDialogEditar(despesa)
+  }
+  function cadastroCurso(){
+    formRef.current?.abrirDialogCadastro();
+  }
+
+  useEffect(() => {
+    listarCursosCallBack();
+    
+  }, []);
+
   return (
     <>
-      <div className="bg-[#c8cdd8]  p-6  rounded-lg overflow-hidden">
+      <div className="bg-[#c8cdd8]  p-6  rounded-lg ">
         <h4>cadastro de curso</h4>
-      
-      <form  >
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label className="text-gray-800 text-sm mb-2 block">Nome</label>
-              <input type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter name" />
-             
-            </div>
-            <div>
-              <label className="text-gray-800 text-sm mb-2 block">Descrição</label>
-              
-              <input  type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter email" />
-            </div>
-          </div>
-          <div className="!mt-12 space-x-4">
-            <button type="submit" className="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
-              Cadastrar
-            </button>
-          </div>
-        </form>
-        </div>
+        <ListaCursos  listaCursos={listaCursos} listarCursos={listarCursos} carregarEditar={carregarEditar} />
+        <Button onClick={cadastroCurso}  >Cadastro Curso</Button>
+        <CursoForm  calbackPosSalvar={listarCursos} ref={formRef} />
+      </div>
     </>
   );
 }
