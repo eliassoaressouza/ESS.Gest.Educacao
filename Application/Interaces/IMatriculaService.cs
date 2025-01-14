@@ -1,13 +1,11 @@
-﻿using Application.Utils;
+﻿using Application.Enums;
+using Application.Utils;
 using Domain.Entities;
-using Domain.Interfaces;
 
 namespace Application.Interaces
 {
     public  interface IMatriculaService
     {
-       
-
-        ReturnInfo<Matricula> ObterLista();
+        ReturnInfo<int> SalvarExcluir(Matricula matricula,MatriculaOperacaoEnum operacao);
     }
 }

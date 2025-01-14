@@ -8,6 +8,8 @@ import { IUsuarioCursosDTO, IUsuarioDTO } from '@/dto/usuario/usuario.dto';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { UsuarioApiClient } from '@/apiclient/usuario.api.client';
+import { MatriculaApiClient } from '@/apiclient/matricula.api.client';
+import { MatriculaOperacaoEnum } from '@/dto/matricula/matricula.dto';
 
 export default function matricula() {
     const [listaCursos, setlistaCurso] = useState([] as ICursoDTO[]);
@@ -32,6 +34,13 @@ export default function matricula() {
     function limpar() {
         setCurso(null);
     }
+    async function maricular(idCurso: number, idUsuario: number, matriculado: boolean) {
+
+        const _matriculaOperacaoEnum = matriculado ? MatriculaOperacaoEnum.EXCLUIR : MatriculaOperacaoEnum.SALVAR;
+        const respApi = await new MatriculaApiClient().Salvar(
+            { IdCurso: idCurso, IdUsuario: idUsuario, Operacao: _matriculaOperacaoEnum });
+        await selecionarCurso({ IdCurso: idCurso } as ICursoDTO);
+    }
 
     useEffect(() => {
         listarCursosCallBack();
@@ -42,7 +51,7 @@ export default function matricula() {
             <ListaCursoMatricula listaCursos={listaCursos} selecionarCurso={selecionarCurso} />
             <Button onClick={limpar} >Limpar</Button>
             <Separator orientation="horizontal" />
-            <AlunosCurso listaUsuarioCursos={listaUsuarioCursos} curso={curso} />
+            <AlunosCurso calbackPosClickCheck={maricular} listaUsuarioCursos={listaUsuarioCursos} curso={curso} />
         </div>
     );
 }

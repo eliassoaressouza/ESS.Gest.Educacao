@@ -4,6 +4,7 @@ namespace Domain.Interfaces
 {
     public interface IMatriculaRepository
     {
-        IList<Matricula> ObterLista();
+        int Salvar(Matricula matricula);
+        int Excluir(int IdUsuario, int IdCurso);
     }
 }

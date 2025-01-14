@@ -1,12 +1,8 @@
-﻿using Application.Interaces;
+﻿using Application.Enums;
+using Application.Interaces;
 using Application.Utils;
 using Domain.Entities;
 using Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -19,13 +15,20 @@ namespace Application.Services
             _MatriculaRepository = matriculaRepository;
         }
 
-        public ReturnInfo<Matricula> ObterLista()
+        public ReturnInfo<int> SalvarExcluir(Matricula matricula, MatriculaOperacaoEnum operacao)
         {
-            var result = new ReturnInfo<Matricula>();
-
-            result.Items = _MatriculaRepository.ObterLista();
-
+            var result = new ReturnInfo<int>();
+            if (operacao== MatriculaOperacaoEnum.SALVAR)
+            {
+                _MatriculaRepository.Salvar(
+                    new Matricula { IdCurso = matricula.IdCurso, IdUsuario = matricula.IdUsuario,Data=DateTime.Now });
+            }
+            else if(operacao == MatriculaOperacaoEnum.EXCLUIR)
+            {
+                _MatriculaRepository.Excluir(matricula.IdUsuario, matricula.IdCurso);
+            }
             return result;
+
         }
     }
 }

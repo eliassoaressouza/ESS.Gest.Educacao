@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -12,20 +13,32 @@ namespace Infrastructure.Repositories
         {
             _appDbContext = appDbContext;
         }
-        public IList<Matricula> ObterLista()
+
+
+        public int Salvar(Matricula matricula)
         {
-            var lista = new List<Matricula>();
+            if (matricula.IdCurso == 0 || matricula.IdUsuario == 0)
+            {
+                throw new ApplicationException("Obrigatório IdCurso e IdUsuario");
+            }
+            var resp = 0;
             using (var ctx = _appDbContext)
             {
+                ctx.Matriculas.Add(matricula);
 
-                foreach (var mat in ctx.Matriculas)
-                {
-                    lista.Add(new Matricula { IdMatricula = mat.IdMatricula, IdCurso = mat.IdCurso, IdUsuario = mat.IdUsuario });
-                }
-              
+                resp = ctx.SaveChanges();
             }
-            return lista;
-
+            return resp;
+        }
+        public int Excluir(int IdUsuario,int IdCurso)
+        {
+            using (var ctx = _appDbContext)
+            {
+                var matricula= ctx.Matriculas.FirstOrDefault(c => c.IdUsuario == IdUsuario&&c.IdCurso==IdCurso);
+                ctx.Matriculas.Remove(matricula);
+                ctx.SaveChanges();
+            }
+            return 0;
         }
     }
 }

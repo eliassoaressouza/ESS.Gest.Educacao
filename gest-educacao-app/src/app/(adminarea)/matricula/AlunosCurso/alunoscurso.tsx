@@ -7,10 +7,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 type AlunosCurso = {
   listaUsuarioCursos: IUsuarioCursosDTO[],
-  curso: ICursoDTO | null
+  curso: ICursoDTO | null,
+  calbackPosClickCheck: (idCurso:number,idUsuario:number,matriculado:boolean) => Promise<void>;
 }
 
-export default function AlunosCurso({ curso, listaUsuarioCursos }: AlunosCurso) {
+export default function AlunosCurso({ curso, listaUsuarioCursos,calbackPosClickCheck }: AlunosCurso) {
   return (
     <>
       {curso ?
@@ -28,7 +29,10 @@ export default function AlunosCurso({ curso, listaUsuarioCursos }: AlunosCurso) 
               <TableRow key={usuario.IdUsuario} >
                 <TableCell className="font-medium">{usuario.UsuarioNome}</TableCell>
                 <TableCell >
-                <Checkbox  checked={usuario.IdCursos&&usuario.IdCursos.find(c=>c==curso.IdCurso)!=undefined?true:false} />
+                <Checkbox onClick={()=>{calbackPosClickCheck(curso.IdCurso,usuario.IdUsuario,
+                  usuario.IdCursos&&usuario.IdCursos.find(c=>c==curso.IdCurso)!=undefined?true:false
+                )}} 
+                 checked={usuario.IdCursos&&usuario.IdCursos.find(c=>c==curso.IdCurso)!=undefined?true:false} />
                 </TableCell>
               </TableRow>
             )}
