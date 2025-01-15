@@ -1,4 +1,5 @@
-﻿using Application.Interaces;
+﻿using Application.Enums;
+using Application.Interaces;
 using Application.Utils;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -22,7 +23,8 @@ namespace Application.Services
             {
                 Senha = senha,
                 Nome = nome,
-                Email = email
+                Email = email,
+                PerfilAcesso=(int)PerfilAcessoEnum.ALUNO
             };
             var userId = await _usuarioRepository.InsertAsync(user);
          

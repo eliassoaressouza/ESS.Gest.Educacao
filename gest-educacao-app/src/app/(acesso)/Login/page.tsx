@@ -8,6 +8,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppContext } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { IUsuarioDTO } from '@/dto/usuario/usuario.dto';
+import { PerfilAcessoEnum } from '@/dto/acesso/perfilacesso';
 
 export function Login() {
   const router = useRouter()
@@ -35,7 +37,12 @@ export function Login() {
       });
       return;
     }
-    router.push('/home');
+    const usuario = retorno.Item as IUsuarioDTO
+    if (usuario.PerfilAcesso == PerfilAcessoEnum.ALUNO) {
+      router.push('/home');
+    }else if(usuario.PerfilAcesso == PerfilAcessoEnum.ADMINISTRADOR){
+      router.push('/curso');
+    }
   }
   return (
     <div className="overflow-x-auto">

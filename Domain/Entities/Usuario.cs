@@ -9,6 +9,7 @@
         public string Email { get; set; } = null!;
 
         public string? Senha { get; set; }
+        public int? PerfilAcesso { get; set; }
 
         public virtual ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
     }

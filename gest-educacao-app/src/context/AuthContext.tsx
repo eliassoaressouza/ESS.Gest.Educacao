@@ -34,7 +34,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         var loginResp = await new AuthApiClient().login({ Email, Senha });
         //armazenar o token
         let resp = loginResp.ReturnInfo;
-        console.log(resp)
         if (resp.Status) {
             setCokkie(loginResp.Token);
             setState(resp.Item as IUsuarioDTO);
@@ -74,7 +73,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         if (token) {
             //refreshToken
             refreshToken(token);
-
+           
 
             //atualizar informações do usuario
             // console.log('token!!!');

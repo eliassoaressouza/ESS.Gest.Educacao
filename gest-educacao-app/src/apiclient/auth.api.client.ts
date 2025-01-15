@@ -9,7 +9,7 @@ export class AuthApiClient {
     async login(data: AuthData): Promise<AuthReturn> {
 
         try {
-            const respApi = await apiService.post('login', data);
+            const respApi = await apiService.post('conta/login', data);
             const dataResp = await respApi.data;
             return dataResp as AuthReturn;
         } catch (error: AxiosError | any) {
@@ -19,7 +19,7 @@ export class AuthApiClient {
     async refresh(authRefresh: AuthRefresh): Promise<AuthReturn> {
 
         try {
-            const respApi = await apiService.post('refresh',authRefresh);
+            const respApi = await apiService.post('conta/refresh',authRefresh);
             const dataResp = await respApi.data;
             return dataResp as AuthReturn;
 

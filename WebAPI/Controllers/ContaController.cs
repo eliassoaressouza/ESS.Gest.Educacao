@@ -1,23 +1,23 @@
 ﻿using Application.Interaces;
 using Application.Utils;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.AuthConfig;
 using WebAPI.ViewModels.Auth;
 using WebAPI.ViewModels.UsuarioVM;
-
 namespace WebAPI.Controllers
 {
-    public class HomeController : ControllerBase
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ContaController : ControllerBase
     {
         IUsuarioService _usuarioService;
 
-        public HomeController(IUsuarioService usuarioService)
+        public ContaController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
         [HttpPost]
-        [Route("api/login")]
+        [Route("login")]
         public ActionResult Authenticate([FromBody] UsuarioLoginViewModel model)
         {
             // Recupera o usuário
@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
             // Retorna os dados
             return Ok(new AuthReturn() { ReturnInfo = usuarioResp, Token = token });
         }
-        [HttpPost("api/refresh")]
+        [HttpPost("refresh")]
         public ActionResult Refresh([FromBody] AuthRefresh authRefresh)
         {
             var result = new ReturnInfo<AuthReturn>();
@@ -59,8 +59,7 @@ namespace WebAPI.Controllers
                 return StatusCode(500, result);  //OR return response
 
             }
-           
-        }
 
+        }
     }
 }

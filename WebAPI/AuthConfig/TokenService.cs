@@ -9,7 +9,7 @@ namespace WebAPI.AuthConfig
 {
     public class TokenService
     {
-        public static string GenerateToken(Usuario user)
+        public static string GenerateToken(Usuario usuario)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -17,10 +17,12 @@ namespace WebAPI.AuthConfig
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name,user.IdUsuario.ToString()),
-                     new Claim("Nome",user.Nome),
-                     new Claim("IdUsuario",user.IdUsuario.ToString()),
-                     new Claim(ClaimTypes.Email, user.Email.ToString()),
+                    new Claim(ClaimTypes.Name,usuario.IdUsuario.ToString()),
+                     new Claim("Nome",usuario.Nome),
+                     new Claim("IdUsuario",usuario.IdUsuario.ToString()),
+                     new Claim(ClaimTypes.Email, usuario.Email.ToString()),
+                     new Claim(ClaimTypes.Role,usuario.PerfilAcesso.ToString()),
+                     new Claim("PerfilAcesso",usuario.PerfilAcesso.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

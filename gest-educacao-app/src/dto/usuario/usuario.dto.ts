@@ -3,6 +3,7 @@ export interface IUsuarioDTO{
     Nome:string;
     Email:string;
     Senha:string;
+    PerfilAcesso:number;
 }
 
 export interface IUsuarioSalvarDTO{
