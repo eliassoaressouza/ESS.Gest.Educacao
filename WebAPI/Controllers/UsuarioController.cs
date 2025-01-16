@@ -94,5 +94,25 @@ namespace WebAPI.Controllers
             }
 
         }
+        [HttpGet()]
+        [Route("listaralunos")]
+        public IActionResult ListarAlunos()
+        {
+            var result = new ReturnInfo<Usuario>();
+            try
+            {
+                result = _usuarioService.ObterListaAlunos();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = "Failure";
+                result.Exception = ex;
+                return StatusCode(500, result);  //OR return response
+
+            }
+
+        }
     }
 }

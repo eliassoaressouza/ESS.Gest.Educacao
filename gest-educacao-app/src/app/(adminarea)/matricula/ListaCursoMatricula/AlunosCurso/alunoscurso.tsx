@@ -1,6 +1,6 @@
 import { ICursoDTO } from '@/dto/curso/curso.dto';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
-import { IUsuarioCursosDTO, IUsuarioDTO } from '@/dto/usuario/usuario.dto';
+import { IUsuarioCursosDTO } from '@/dto/usuario/usuario.dto';
 import { Checkbox } from '@/components/ui/checkbox';
 
 
@@ -16,7 +16,7 @@ export default function AlunosCurso({ curso, listaUsuarioCursos,calbackPosClickC
     <>
       {curso ?
       <div>
-        <p>Curso: {curso.Nome}</p>
+        <h1 className='font-mono font-medium text-xl ' >Matrículas no Curso: {curso.Nome}</h1>
         <Table>
           <TableHeader>
             <TableRow>

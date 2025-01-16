@@ -12,6 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt">
+      <title>Gestão Educação</title>
       <body>
         <Toaster />
           <AppWrapper>

@@ -72,5 +72,18 @@ namespace Application.Services
         {
             return _usuarioRepository.ObterListaComMatriculas();
         }
+
+        public ReturnInfo<Usuario> ObterListaAlunos()
+        {
+            var result = new ReturnInfo<Usuario>();
+
+            var lista = _usuarioRepository.ObterLista();
+            if (lista != null && lista.Any())
+            {
+                result.Items=lista.Where(u=> u.PerfilAcesso!=null&&u.PerfilAcesso==(int)PerfilAcessoEnum.ALUNO).ToList();
+            }
+
+            return result;
+        }
     }
 }

@@ -25,7 +25,7 @@ export default function BarraLateral() {
                             src="/gelogo.png"
                             width={50}
                             height={50}
-                            alt="Picture of the author"
+                            alt="logo"
                         />
                     </a>
                     <button id="close-sidebar" className='ml-auto'>
@@ -49,7 +49,7 @@ export default function BarraLateral() {
                         </li>
                         <li>
                             {state?.PerfilAcesso == PerfilAcessoEnum.ADMINISTRADOR ?
-                                <BarraItem link="/matricula" label="Matricula" icone={<NotebookPen />} />
+                                <BarraItem link="/matricula" label="Matrícula" icone={<NotebookPen />} />
                                 : <div></div>
                             }
                         </li>

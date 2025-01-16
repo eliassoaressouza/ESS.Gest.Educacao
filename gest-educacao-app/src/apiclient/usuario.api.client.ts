@@ -19,5 +19,9 @@ export class UsuarioApiClient {
         const respApi = await apiService.get(`usuario/listarusuariocursos`);
         return await respApi.data;
     }
+    async ObterListaAlunos(): Promise<ReturnInfo> {
+        const respApi = await apiService.get(`usuario/listaralunos`);
+        return await respApi.data;
+    }
 
 }

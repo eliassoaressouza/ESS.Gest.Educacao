@@ -63,7 +63,13 @@ namespace Infrastructure.Repositories
                 foreach (var item in ctx.Usuarios)
                 {
 
-                    lista.Add(new Usuario { Email = item.Email, IdUsuario = item.IdUsuario, Nome = item.Nome });
+                    lista.Add(new Usuario
+                    {
+                        Email = item.Email,
+                        IdUsuario = item.IdUsuario,
+                        Nome = item.Nome,
+                        PerfilAcesso = item.PerfilAcesso
+                    });
 
                 }
             }
