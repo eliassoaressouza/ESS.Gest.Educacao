@@ -24,6 +24,7 @@ export class AuthApiClient {
             return dataResp as AuthReturn;
 
         } catch (error: AxiosError | any) {
+            console.log(error)
             return error.response.data as AuthReturn
         }
     }

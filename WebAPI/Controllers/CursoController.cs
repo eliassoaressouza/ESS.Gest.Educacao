@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
             _cursoService = cursoService;
         }
         [HttpGet()]
-        [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+       // [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Listar(int idusuario)
         {
             var result = new ReturnInfo<Curso>();

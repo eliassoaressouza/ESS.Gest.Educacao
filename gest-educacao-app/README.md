@@ -19,3 +19,11 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Docker: 
+docker build
+```docker run:
+docker run -p 3030:3030 gest-educacao-app-front
+```
+```docker compose :
+docker compose up -d
+```

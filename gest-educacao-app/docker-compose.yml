@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gest-educacao-app-front
+    ports:
+      - "3030:3030"
+    restart: unless-stopped

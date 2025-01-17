@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
       configurePolicy: policy =>
       {
           policy.AllowAnyOrigin().SetIsOriginAllowed((host) => true).AllowAnyHeader().AllowAnyMethod();
-          policy.WithOrigins("http://localhost:3000");
+         // policy.WithOrigins("http://localhost:3000");
       });
 });
 //auth JWT
